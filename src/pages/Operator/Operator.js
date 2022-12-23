@@ -13,9 +13,18 @@ function Operator() {
 
     const deleteOperator = async(e) => {
         console.log(e.target.value)
-  
+        const id = e.target.value
+        document.getElementById('deleteId').value = id
   
       }
+
+    const confirmDeleteInternet = async(e) => {
+        console.log(e.target.value)
+        const id = e.target.value
+        await axios.delete('http://localhost:2022/operator/delete?id='+id)
+        loadOperators()
+
+    }
   
       const editOperator = async(e) => {
         console.log(e.target.value)
@@ -47,13 +56,80 @@ function Operator() {
                         <p className="card-text">
                         The operator {operator.name}.
                         </p>
-                        <button value={operator.operatorId} onClick={(e)=>editOperator(e)} className="btn btn-outline-info">edit</button>
-                        <button value={operator.operatorId} onClick={(e)=>deleteOperator(e)} className="btn btn-outline-danger" style={{ marginLeft: 10 }}>delete</button>
+                        <button value={operator.operatorId} data-bs-toggle="modal"
+                              data-bs-target="#editModal" onClick={(e)=>editOperator(e)} className="btn btn-outline-info">edit</button>
+                        <button value={operator.operatorId} data-bs-toggle="modal"
+                              data-bs-target="#deleteModal" onClick={(e)=>deleteOperator(e)} className="btn btn-outline-danger" style={{ marginLeft: 10 }}>delete</button>
                     </div>
                 </div>
             </div>
             ))}
         </div>
+
+        <div className="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+                          <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel1">Edit Operator </h5>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">
+                                <div className="row">
+                                  <div className="col mb-3">
+                                    <label for="nameBasic" className="form-label">Name</label>
+                                    <input type="text" id="editNumber" className="form-control" placeholder="Enter Name" />
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col mb-3">
+                                    <label for="nameBasic" className="form-label">Image</label>
+                                    <input type="file" id="editEmail" className="form-control" placeholder="Enter Name" />
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="modal-footer">
+                                <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+                          <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel1">Delete Operator </h5>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">Are you sure you want to delete this operator.</div>
+                              <div className="modal-footer">
+                              <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button
+                                  className="btn btn-primary"
+                                  id='deleteId'
+                                  onClick={(e)=>confirmDeleteInternet(e)}
+                                >
+                                  Yes
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
     </div>
   )
 }

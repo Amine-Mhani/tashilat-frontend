@@ -4,6 +4,15 @@ import axios from 'axios'
 function Phone() {
 
     const[phones, setPhones] = React.useState([])
+    const [operators, setOperators] = React.useState([])
+    const [edit, setEdit] = React.useState("")
+
+
+    const [number, setNumber] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [amount, setAmount] = React.useState("");
+    const [operator, setOperator] = React.useState("");
+    const [id, setId] = React.useState("");
 
     const loadPhones = async()=>{
         const all = await axios.get('http://localhost:2022/Phone-Internet/phone/all')
@@ -11,20 +20,60 @@ function Phone() {
         console.log(all.data)
     }
 
+    const loadOperators = async()=>{
+      const all = await axios.get('http://localhost:2022/operator/all')
+      setOperators(all.data)
+      console.log(all.data)
+      
+    }
+
     const deletePhone = async(e) => {
       console.log(e.target.value)
+      const id = e.target.value
+      document.getElementById('deleteId').value = id
+
+
+    }
+
+    const confirmDeletePhone = async(e) => {
+      console.log(e.target.value)
+      const id = e.target.value
+      await axios.delete('http://localhost:2022/Phone-Internet/phone/delete?id='+id)
+      loadPhones()
 
 
     }
 
     const editPhone = async(e) => {
       console.log(e.target.value)
+      const id = e.target.value
+      const phoneEdit = await axios.get('http://localhost:2022/Phone-Internet/phone/get?id='+id)
+      setEdit(phoneEdit.data)
 
+      setEmail(phoneEdit.data.email)
+      setAmount(phoneEdit.data.amount)
+      setNumber(phoneEdit.data.number)
+      setOperator(phoneEdit.data.operator)
+      document.getElementById("editOperator").selectedIndex = phoneEdit.data.operator.operatorId-1;
+      
+      setId(phoneEdit.data.phoneId)
+
+      console.log(phoneEdit.data)
+
+    }
+
+    const updatePhone = async(e) => {
+      const phoneId = id
+      const phone = {phoneId, number, email, amount, operator}
+      console.log(phone)
+      await axios.post('http://localhost:2022/Phone-Internet/phone/update', phone)
+      loadPhones()
 
     }
 
     React.useEffect(()=>{
         loadPhones()
+        loadOperators()
     },[])
 
 
@@ -38,42 +87,46 @@ function Phone() {
                 <a href="/phone/add" className="btn btn-primary">add</a>
             </div>
         </div>
-        <div class="card">
-                <h5 class="card-header">Light Table head</h5>
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead class="table-light">
+        <div className="card">
+                <h5 className="card-header">Light Table head</h5>
+                <div className="table-responsive text-nowrap">
+                  <table className="table">
+                    <thead className="table-light">
                       <tr>
                         <th>#</th>
                         <th>Reference</th>
                         <th>Number</th>
                         <th>Price</th>
                         <th>Amount</th>
+                        <th>Operator</th>
                         <th>Date</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
+                    <tbody className="table-border-bottom-0">
                         {phones.map((phone)=>(
                       <tr>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{phone.phoneId}</strong></td>
+                        <td><i className="fab fa-angular fa-lg text-danger me-3"></i> <strong>{phone.phoneId}</strong></td>
                         <td>{phone.reference}</td>
                         <td>{phone.number}</td>
                         <td>{phone.price} DH</td>
                         <td>
                         {phone.amount} min
                         </td>
+                        <td>{phone.operator.name}</td>
                         <td>{phone.date}</td>
                         <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
+                          <div className="dropdown">
+                            <button type="button" className="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i className="bx bx-dots-vertical-rounded"></i>
                             </button>
-                            <div class="dropdown-menu">
-                              <button class="dropdown-item"
-                                ><i class="bx bx-edit-alt me-1" onClick={(e)=>editPhone(e)}  value={phone.phoneId}></i> Edit</button>
-                              <button class="dropdown-item" onClick={(e)=>deletePhone(e)} value={phone.phoneId}
-                                ><i class="bx bx-trash me-1"></i> Delete</button>
+                            <div className="dropdown-menu">
+                              <button className="dropdown-item" data-bs-toggle="modal"
+                              data-bs-target="#editModal" onClick={(e)=>editPhone(e)} value={phone.phoneId}
+                                ><i className="bx bx-edit-alt me-1" ></i> Edit</button>
+                              <button className="dropdown-item" data-bs-toggle="modal"
+                              data-bs-target="#deleteModal" onClick={(e)=>deletePhone(e)} value={phone.phoneId}
+                                ><i className="bx bx-trash me-1"></i> Delete</button>
                             </div>
                           </div>
                         </td>
@@ -81,6 +134,91 @@ function Phone() {
                     ))}
                     </tbody>
                   </table>
+                        
+                        <div className="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+                          <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel1">Edit Phone Bill </h5>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">
+                                <div className="row">
+                                  <div className="col mb-3">
+                                    <label for="nameBasic" className="form-label">Number</label>
+                                    <input type="text" id="editNumber" className="form-control" placeholder="Enter Name" value={number} onChange={(e)=>setNumber(e.target.value)}/>
+                                  </div>
+                                </div>
+                                <div className="row g-2">
+                                  <div className="col mb-0">
+                                    <label for="emailBasic" className="form-label">Amount</label>
+                                    <input type="text" id="editAmount" className="form-control" placeholder="xxxx@xxx.xx" value={amount}  onChange={(e)=>setAmount(e.target.value)}/>
+                                  </div>
+                                  <div className="col mb-0">
+                                    <label for="dobBasic" className="form-label">Operator</label>
+                                    <select className="form-select" id="editOperator" name='operator' aria-label="Default select example" onChange={(e)=>setOperator(JSON.parse(e.target.value))}>
+                                      {operators.map((operator) => (
+                                      <option value={JSON.stringify(operator)}>{operator.name}</option>
+                                      ))}
+                                    </select>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col mb-3">
+                                    <label for="nameBasic" className="form-label">Email</label>
+                                    <input type="text" id="editEmail" className="form-control" placeholder="Enter Name" value={email}  onChange={(e)=>setEmail(e.target.value)}/>
+                                  </div>
+                                </div>
+                                <div className="row" hidden>
+                                  <div className="col mb-3">
+                                    <input type="text" id="editNumber" className="form-control" placeholder="Enter Name" value={id}  onChange={(e)=>setId(e.target.value)}/>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="modal-footer">
+                                <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" data-bs-dismiss="modal" className="btn btn-primary" onClick={(e)=>updatePhone()}>Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+                          <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel1">Delete Phone Bill </h5>
+                                <button
+                                  type="button"
+                                  className="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div className="modal-body">Are you sure you want to delete this phone bill.</div>
+                              <div className="modal-footer">
+                              <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button
+                                  className="btn btn-primary"
+                                  id='deleteId'
+                                  onClick={(e)=>confirmDeletePhone(e)}
+                                  data-bs-dismiss="modal"
+                                >
+                                  Yes
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                 </div>
               </div>
     </div>
