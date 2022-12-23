@@ -11,6 +11,18 @@ function Operator() {
         console.log(all.data)
     }
 
+    const deleteOperator = async(e) => {
+        console.log(e.target.value)
+  
+  
+      }
+  
+      const editOperator = async(e) => {
+        console.log(e.target.value)
+  
+  
+      }
+
     React.useEffect(()=>{
         loadOperators()
     },[])
@@ -35,8 +47,8 @@ function Operator() {
                         <p className="card-text">
                         The operator {operator.name}.
                         </p>
-                        <a href="#" className="btn btn-outline-info">edit</a>
-                        <a href="#" className="btn btn-outline-danger" style={{ marginLeft: 10 }}>delete</a>
+                        <button value={operator.operatorId} onClick={(e)=>editOperator(e)} className="btn btn-outline-info">edit</button>
+                        <button value={operator.operatorId} onClick={(e)=>deleteOperator(e)} className="btn btn-outline-danger" style={{ marginLeft: 10 }}>delete</button>
                     </div>
                 </div>
             </div>
