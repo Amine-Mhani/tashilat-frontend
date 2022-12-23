@@ -29,14 +29,14 @@ function Operator() {
             {operators.map((operator)=>(
             <div className="col-md-6 col-lg-4 mb-3" key={operator.operatorId}>
                 <div className="card h-100">
-                    <img className="card-img-top" src={"../assets/img/operators/"+operator.image} alt="Card image cap"  height={406} width={'auto'}/>
+                <div className='img-fluid' style={{"height": "200px","maxHeight": "200px", "background-size":"auto 100%","background-position":"50%", "background-repeat":"no-repeat","background-image": 'url(../assets/img/operators/'+operator.image+')', }}></div>
                     <div className="card-body">
                         <h5 className="card-title">{operator.name}</h5>
                         <p className="card-text">
                         The operator {operator.name}.
                         </p>
                         <a href="#" className="btn btn-outline-info">edit</a>
-                        <a href="#" className="btn btn-outline-danger" style={{ marginLeft: 10 }}>edit</a>
+                        <a href="#" className="btn btn-outline-danger" style={{ marginLeft: 10 }}>delete</a>
                     </div>
                 </div>
             </div>

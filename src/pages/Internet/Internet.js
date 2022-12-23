@@ -47,7 +47,7 @@ function Internet() {
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{internet.internet_id}</strong></td>
                         <td>{internet.reference}</td>
                         <td>{internet.number}</td>
-                        <td>{internet.price}</td>
+                        <td>{internet.price} DH</td>
                         <td>{internet.forfait}</td>
                         <td>{internet.operator.name}</td>
                         <td>{internet.date}</td>
@@ -65,7 +65,7 @@ function Internet() {
                           </div>
                         </td>
                       </tr>
-))}
+                        ))}
                     </tbody>
                   </table>
                 </div>
