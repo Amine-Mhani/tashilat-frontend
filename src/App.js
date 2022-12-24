@@ -9,6 +9,8 @@ import Phone from './pages/Phone/Phone';
 import Internet from './pages/Internet/Internet';
 import AddPhone from './pages/Phone/AddPhone';
 import AddInternet from './pages/Internet/AddInternet';
+import Client from './pages/Wifi/Client/Client';
+import AddClient from './pages/Wifi/Client/AddClient';
 
 
 
@@ -28,6 +30,9 @@ function App() {
 
           <Route exact path="/internet" element={<Internet/>}/>
           <Route exact path="/internet/add" element={<AddInternet/>}/>
+
+          <Route exact path="/wifi/clients" element={<Client/>}/>
+          <Route exact path="/wifi/clients/add" element={<AddClient/>}/>
         </Routes>
         </div>
       </div>

@@ -84,7 +84,7 @@ function Sidebar() {
               </a>
             </li>
 
-            <li className={`menu-item ${open?"open":""}`} onClick={()=>{setOpen(open?false:true)}}>
+            <li className="menu-item">
               <a href="#" className="menu-link menu-toggle">
                 <i className="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Layouts</div>
@@ -182,6 +182,25 @@ function Sidebar() {
                 <li className="menu-item">
                   <a href="pages-misc-under-maintenance.html" className="menu-link">
                     <div data-i18n="Under Maintenance">Under Maintenance</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li className={`menu-item ${open?"open":""}`} onClick={()=>{setOpen(open?false:true)}}>
+              <a className="menu-link menu-toggle">
+                <i className="menu-icon tf-icons bx bx-wifi"></i>
+                <div data-i18n="Misc">Wifi</div>
+              </a>
+              <ul className="menu-sub">
+                <li className="menu-item">
+                  <a href="/wifi/bills" className="menu-link">
+                    <div data-i18n="Error">Bills</div>
+                  </a>
+                </li>
+                <li className="menu-item">
+                  <a href="/wifi/clients" className="menu-link">
+                    <div data-i18n="Under Maintenance">Clients</div>
                   </a>
                 </li>
               </ul>
