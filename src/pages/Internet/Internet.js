@@ -7,6 +7,13 @@ function Internet() {
     const[internets, setInternets] = React.useState([])
     const [operators, setOperators] = React.useState([])
 
+    const [number, setNumber] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [price, setPrice] = React.useState("");
+    const [operator, setOperator] = React.useState("");
+    const [forfait, setForfait] = React.useState("");
+    const [id, setId] = React.useState("");
+
     const loadInternets = async()=>{
         const all = await axios.get('http://localhost:2022/Phone-Internet/internet/all')
         setInternets(all.data)
@@ -46,13 +53,37 @@ function Internet() {
 
     const editInternet = async(e) => {
       console.log(e.target.value)
+      const id = e.target.value
+      
+      const internetEdit = await axios.get('http://localhost:2022/Phone-Internet/internet/get?id='+id)
+
+      console.log(internetEdit)
+
+      setEmail(internetEdit.data.email)
+      setPrice(internetEdit.data.price)
+      setNumber(internetEdit.data.number)
+      setOperator(internetEdit.data.operator)
+      setForfait(internetEdit.data.forfait)
+      setId(internetEdit.data.internet_id)
+
+      document.getElementById("editOperator").selectedIndex = internetEdit.data.operator.operatorId-1;
+      if(internetEdit.data.forfait == '*3'){
+        document.getElementById("editForfait").selectedIndex = 0
+      } else{
+        document.getElementById("editForfait").selectedIndex = 1
+      }
 
 
     }
 
     const updateInternet = async(e) => {
       console.log(e.target.value)
-
+      const internet_id = id
+      const internet = {internet_id, email, price, number, operator, forfait}
+      console.log('now')
+      console.log(internet)
+      await axios.post('http://localhost:2022/Phone-Internet/internet/update', internet)
+      loadInternets()      
 
     }
 
@@ -132,18 +163,17 @@ function Internet() {
                                 <div className="row">
                                   <div className="col mb-3">
                                     <label for="nameBasic" className="form-label">Number</label>
-                                    <input type="text" id="editNumber" className="form-control" placeholder="Enter Name" />
+                                    <input type="text" id="editNumber" className="form-control" placeholder="Enter Name" value={number} onChange={(e)=>setNumber(e.target.value)}/>
                                   </div>
                                 </div>
                                 <div className="row g-2">
                                   <div className="col mb-0">
                                     <label for="emailBasic" className="form-label">Amount</label>
-                                    <input type="text" id="editAmount" className="form-control" placeholder="xxxx@xxx.xx" />
+                                    <input type="text" id="editAmount" className="form-control" value={price} onChange={(e)=>setPrice(e.target.value)}/>
                                   </div>
                                   <div className="col mb-0">
                                     <label for="dobBasic" className="form-label">Forfait</label>
-                                    <select className="form-select" id="exampleFormControlSelect1" name='forfait' aria-label="Default select example">
-                                      <option selected>--Select Forfait</option>
+                                    <select className="form-select" id="editForfait" name='forfait' aria-label="Default select example" onChange={(e)=>setForfait(e.target.value)}>
                                       <option value="*3">*3</option>
                                       <option value="*6">*6</option>
                                     </select>
@@ -152,8 +182,7 @@ function Internet() {
                                 <div className="row">
                                   <div className="col mb-3">
                                     <label for="nameBasic" className="form-label">Operator</label>
-                                    <select className="form-select" id="exampleFormControlSelect1" name='operator' aria-label="Default select example">
-                                      <option selected>--Select Operator</option>
+                                    <select className="form-select" id="editOperator" name='operator' aria-label="Default select example" onChange={(e)=>setOperator(JSON.parse(e.target.value))}>
                                       {operators.map((operator) => (
                                       <option value={JSON.stringify(operator)}>{operator.name}</option>
                                       ))}
@@ -163,7 +192,12 @@ function Internet() {
                                 <div className="row">
                                   <div className="col mb-3">
                                     <label for="nameBasic" className="form-label">Email</label>
-                                    <input type="text" id="editEmail" className="form-control" placeholder="Enter Name" />
+                                    <input type="text" id="editEmail" className="form-control" placeholder="Enter Name" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                                  </div>
+                                </div>
+                                <div className="row">
+                                  <div className="col mb-3" hidden>
+                                    <input type="text" id="editId" value={id} className="form-control"/>
                                   </div>
                                 </div>
                               </div>
@@ -171,7 +205,7 @@ function Internet() {
                                 <button type="button" className="btn btn-outline-secondary" data-bs-dismiss="modal">
                                   Close
                                 </button>
-                                <button type="button" className="btn btn-primary">Save changes</button>
+                                <button type="button" data-bs-dismiss="modal" onClick={(e)=>updateInternet(e)} className="btn btn-primary">Save changes</button>
                               </div>
                             </div>
                           </div>
