@@ -14,6 +14,9 @@ function Phone() {
     const [operator, setOperator] = React.useState("");
     const [id, setId] = React.useState("");
 
+    let [openUpdate, setOpenUpdate] = React.useState();
+    let [openDelete, setOpenDelete] = React.useState();
+
     const loadPhones = async()=>{
         const all = await axios.get('http://localhost:2022/Phone-Internet/phone/all')
         setPhones(all.data)
@@ -39,6 +42,7 @@ function Phone() {
       console.log(e.target.value)
       const id = e.target.value
       await axios.delete('http://localhost:2022/Phone-Internet/phone/delete?id='+id)
+      setOpenDelete(openDelete?false:true)
       loadPhones()
 
 
@@ -59,6 +63,7 @@ function Phone() {
       setId(phoneEdit.data.phoneId)
 
       console.log(phoneEdit.data)
+      
 
     }
 
@@ -67,9 +72,12 @@ function Phone() {
       const phone = {phoneId, number, email, amount, operator}
       console.log(phone)
       await axios.post('http://localhost:2022/Phone-Internet/phone/update', phone)
+      setOpenUpdate(openUpdate?false:true)
       loadPhones()
 
     }
+
+    
 
     React.useEffect(()=>{
         loadPhones()
@@ -79,6 +87,25 @@ function Phone() {
 
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
+
+      <div className={`bs-toast toast toast-placement-ex m-2 bg-info top-0 end-0 fade ${openUpdate?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div className="toast-header">
+          <i className="bx bx-bell me-2"></i>
+          <div className="me-auto fw-semibold">Item updated</div>
+          <small>now</small>
+          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenUpdate(openUpdate?false:true)} aria-label="Close"></button>
+        </div>
+        <div className="toast-body">This item was updated successfully in the database.</div>
+      </div>
+      <div className={`bs-toast toast toast-placement-ex m-2 bg-danger top-0 end-0 fade ${openDelete?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div className="toast-header">
+          <i className="bx bx-bell me-2"></i>
+          <div className="me-auto fw-semibold">Item deleted</div>
+          <small>now</small>
+          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenDelete(openDelete?false:true)} aria-label="Close"></button>
+        </div>
+        <div className="toast-body">This item was deleted successfully in the database.</div>
+      </div>
         <div className='row pb-0'>
             <div className='col-11'>
                 <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Phone Bills /</span> list</h4>
@@ -219,9 +246,14 @@ function Phone() {
                             </div>
                           </div>
                         </div>
+                        
                 </div>
               </div>
+
+                    
+              
     </div>
+    
   )
 }
 

@@ -12,7 +12,7 @@ function AddInternet() {
   const [forfait, setForfait] = React.useState('')
   const [price, setPrice] = React.useState('')
 
-
+  let [openAdd, setOpenAdd] = React.useState();
 
   
 
@@ -35,8 +35,10 @@ function AddInternet() {
     setOperator("")
     setForfait("")
     setPrice("")
+
+    setOpenAdd(openAdd?false:true)
     
-    alert('internet was create successfully')
+    //alert('internet was create successfully')
 
   }
 
@@ -47,6 +49,15 @@ function AddInternet() {
 
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
+      <div className={`bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade ${openAdd?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div className="toast-header">
+          <i className="bx bx-bell me-2"></i>
+          <div className="me-auto fw-semibold">Item created</div>
+          <small>now</small>
+          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenAdd(openAdd?false:true)} aria-label="Close"></button>
+        </div>
+        <div className="toast-body">This item was added successfully in the database.</div>
+      </div>
         <div className='row pb-0'>
             <div className='col-11'>
                 <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Internet Bills /</span> add</h4>
