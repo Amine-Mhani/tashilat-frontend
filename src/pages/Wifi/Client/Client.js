@@ -25,13 +25,6 @@ function Client() {
         console.log(all.data)
     }
 
-    const loadOperators = async()=>{
-      const all = await axios.get('http://localhost:2022/operator/all')
-      setOperators(all.data)
-      console.log(all.data)
-      
-    }
-
     const deleteClient = async(e) => {
       console.log(e.target.value)
       const id = e.target.value
@@ -62,9 +55,6 @@ function Client() {
       setNumber(clientEdit.data.number)
       setBirthDate(clientEdit.data.birthdate)
       setCin(clientEdit.data.cin)
-
-
-
       
       setId(clientEdit.data.id)
 
@@ -87,7 +77,6 @@ function Client() {
 
     React.useEffect(()=>{
         loadClients()
-        loadOperators()
     },[])
 
 
@@ -118,11 +107,11 @@ function Client() {
                 <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Wifi CLients /</span> list</h4>
             </div>
             <div className='col-1 pt-3'>
-                <a href="/wifi/clients/add" className="btn btn-primary">add</a>
+                <a href="/wifi/clients-add" className="btn btn-primary">add</a>
             </div>
         </div>
         <div className="card">
-                <h5 className="card-header">Light Table head</h5>
+                <h5 className="card-header">Client Bills</h5>
                 <div className="table-responsive text-nowrap">
                   <table className="table">
                     <thead className="table-light">
