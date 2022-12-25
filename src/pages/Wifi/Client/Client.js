@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import $ from 'jquery'
+import DataTable from 'datatables.net';
+
 
 function Client() {
 
@@ -25,6 +28,8 @@ function Client() {
         console.log(all.data)
     }
 
+
+
     const deleteClient = async(e) => {
       console.log(e.target.value)
       const id = e.target.value
@@ -37,9 +42,6 @@ function Client() {
       await axios.delete('http://localhost:2022/client/delete?id='+id)
       loadClients()
       setOpenDelete(openDelete?false:true)
-
-
-
     }
 
     const editClient = async(e) => {
@@ -111,9 +113,21 @@ function Client() {
             </div>
         </div>
         <div className="card">
-                <h5 className="card-header">Client Bills</h5>
+              <div className="row text-nowrap">
+                <div className="col-9">
+                  <h5 className="card-header">Clients List</h5>
+                  </div>
+                  <div className="col-3 pe-5">
+                  <input
+                      type="text"
+                      name='fname'
+                      className="form-control m-3"
+                      placeholder="Search by code (#...)"
+                    />
+                  </div>
+              </div>
                 <div className="table-responsive text-nowrap">
-                  <table className="table">
+                  <table className="table" id="tab">
                     <thead className="table-light">
                       <tr>
                         <th>#</th>

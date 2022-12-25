@@ -29,6 +29,13 @@ function Wifi() {
         
       }
 
+      const search = async(e)=>{
+        const sid = e.target.value
+        const some = await axios.get('http://localhost:2022/wifi/code/'+sid)
+        setWifis(some.data)
+        console.log(some.data)
+    }
+
 
     const deleteWifi = async(e) => {
       console.log(e.target.value)
@@ -129,13 +136,26 @@ function Wifi() {
             </div>
         </div>
         <div className="card">
-                <h5 className="card-header">Wifi Bills</h5>
+        <div className="row text-nowrap">
+                <div className="col-9">
+                  <h5 className="card-header">Wifi Bills</h5>
+                  </div>
+                  <div className="col-3 pe-5">
+                  <input
+                      type="text"
+                      name='fname'
+                      className="form-control m-3"
+                      placeholder="Search by code (#...)"
+                      onChange={(e)=>search(e)}
+                    />
+                  </div>
+              </div>
                 <div className="table-responsive text-nowrap">
                   <table className="table">
                     <thead className="table-light">
                       <tr>
                       <th>#</th>
-                        <th>Reference</th>
+                        <th>Code</th>
                         <th>Client</th>
                         <th>Price</th>
                         <th>Month</th>
@@ -148,7 +168,7 @@ function Wifi() {
                         {wifis.map((wifi)=>(
                       <tr>
                         <td><i className="fab fa-angular fa-lg text-danger me-3"></i> <strong>{wifi.id}</strong></td>
-                        <td>{wifi.reference} </td>
+                        <td>{wifi.code} </td>
                         <td>{wifi.client.lname+" "+wifi.client.fname}</td>
                         <td>{wifi.price} DH</td>
                         <td>
