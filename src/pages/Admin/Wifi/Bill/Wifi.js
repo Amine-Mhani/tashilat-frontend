@@ -1,6 +1,11 @@
 import React from 'react'
 import axios from 'axios';
-import Phone from '../../Phone/Phone';
+
+import PDF from '../../../../components/PDF';
+import { useReactToPrint } from 'react-to-print'
+import Sidebar from '../../../../components/Sidebar'
+import Navbar from '../../../../components/Navbar'
+
 
 function Wifi() {
 
@@ -91,7 +96,7 @@ function Wifi() {
           month: 'long',
         });
       }
-
+      
     const state = (state) => {
         if(state == "Not payed"){
             return <span className="badge bg-label-danger me-1">{state}</span>;
@@ -107,6 +112,11 @@ function Wifi() {
         loadOperators()
     },[])
   return (
+    <>
+    <Sidebar/>
+      <div className="layout-page">
+        <Navbar/>
+        <div className="content-wrapper">
     <div className="container-xxl flex-grow-1 container-p-y">
 
       <div className={`bs-toast toast toast-placement-ex m-2 bg-info top-0 end-0 fade ${openUpdate?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
@@ -189,6 +199,8 @@ function Wifi() {
                               <button className="dropdown-item" data-bs-toggle="modal" onClick={(e)=>deleteWifi(e)} value={wifi.id}
                               data-bs-target="#deleteModal" 
                                 ><i className="bx bx-trash me-1"></i> Delete</button>
+
+                               <PDF wifi={wifi}/>
                             </div>
                           </div>
                         </td>
@@ -264,6 +276,9 @@ function Wifi() {
                     
               
     </div>
+    </div>
+      </div>
+      </>
   )
 }
 

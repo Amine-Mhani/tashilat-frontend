@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import Sidebar from '../../../components/Sidebar'
+import Navbar from '../../../components/Navbar'
 
 function Operator() {
 
@@ -37,6 +39,11 @@ function Operator() {
     },[])
 
   return (
+    <>
+    <Sidebar/>
+      <div className="layout-page">
+        <Navbar/>
+        <div className="content-wrapper">
     <div className="container-xxl flex-grow-1 container-p-y">
         <div className='row pb-0'>
             <div className='col-11'>
@@ -131,6 +138,9 @@ function Operator() {
                           </div>
                         </div>
     </div>
+    </div>
+    </div>
+    </>
   )
 }
 

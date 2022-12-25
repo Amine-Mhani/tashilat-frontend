@@ -1,7 +1,32 @@
 import React from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 function Login() {
+
+  const [email, setEmail] = React.useState("")
+  const [password, setPassword] = React.useState("")
+
+
+  let navigate = useNavigate()
+
+
+  const login = async(e) => {
+    e.preventDefault()
+    const response = await axios.get('http://localhost:2022/users/login?email='+email)
+    const user = response.data
+    console.log(user)
+    if(password == user.password){
+      if(user.type == 'admin'){
+        navigate('/')
+      }else if(user.type == 'user'){
+        navigate('/home')
+      }
+    }
+  }
+
+
 
   return (
     <div className="container-xxl">
@@ -75,15 +100,17 @@ function Login() {
               <h4 className="mb-2">Welcome to Tashilat! 👋</h4>
               <p className="mb-4">Please sign-in to your account</p>
 
-              <form id="formAuthentication" className="mb-3" action="index.html" method="POST">
+              <form id="formAuthentication" className="mb-3">
                 <div className="mb-3">
                   <label for="email" className="form-label">Email or Username</label>
                   <input
                     type="text"
                     className="form-control"
                     id="email"
+                    value={email}
                     name="email-username"
                     placeholder="Enter your email or username"
+                    onChange={(e)=>setEmail(e.target.value)}
                     autofocus
                   />
                 </div>
@@ -95,8 +122,10 @@ function Login() {
                     <input
                       type="password"
                       id="password"
+                      value={password}
                       className="form-control"
                       name="password"
+                      onChange={(e)=>setPassword(e.target.value)}
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
@@ -104,7 +133,7 @@ function Login() {
                   </div>
                 </div>
                 <div className="mb-3">
-                  <button className="btn btn-primary d-grid w-100" onClick={(e)=>dash(e)} type="submit">Sign in</button>
+                  <button className="btn btn-primary d-grid w-100" onClick={(e)=>login(e)}>Sign in</button>
                 </div>
               </form>
 

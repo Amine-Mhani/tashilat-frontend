@@ -1,7 +1,14 @@
 import React from 'react'
+import Sidebar from '../../../components/Sidebar'
+import Navbar from '../../../components/Navbar'
 
 function AddOperator() {
   return (
+    <>
+    <Sidebar/>
+      <div className="layout-page">
+        <Navbar/>
+        <div className="content-wrapper">
     <div className="container-xxl flex-grow-1 container-p-y">
         <h4 className="fw-bold py-3 mb-4"><span className="text-muted fw-light">Operators /</span> add</h4>
 
@@ -38,6 +45,9 @@ function AddOperator() {
                 </div>
        
     </div>
+    </div>
+    </div>
+    </>
   )
 }
 

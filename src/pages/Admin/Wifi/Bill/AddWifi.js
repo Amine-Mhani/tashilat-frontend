@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import Sidebar from '../../../../components/Sidebar'
+import Navbar from '../../../../components/Navbar'
 
 function AddWifi() {
 
@@ -61,6 +63,11 @@ function AddWifi() {
         loadClients()
     },[])
   return (
+    <>
+    <Sidebar/>
+      <div className="layout-page">
+        <Navbar/>
+        <div className="content-wrapper">
     <div className="container-xxl flex-grow-1 container-p-y">
       <div className={`bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade ${openAdd?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
         <div className="toast-header">
@@ -133,6 +140,9 @@ function AddWifi() {
             </div>
         </div>
     </div>
+    </div>
+      </div>
+      </>
   )
 }
 
