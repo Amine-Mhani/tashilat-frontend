@@ -16,6 +16,10 @@ import Login from './pages/Login/Login';
 import Home from './pages/User/Home';
 import Dashboard from './pages/Admin/Dashboard';
 import Main from './pages/Login/Main';
+import UserPhone from './pages/User/Phone-Internet/UserPhone';
+import UserInternet from './pages/User/Phone-Internet/UserInternet';
+import UserWifi from './pages/User/Phone-Internet/UserWifi';
+import PIHome from './pages/User/Phone-Internet/PIHome';
 
 
 
@@ -55,6 +59,10 @@ function App() {
           <Routes>
             
             <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/phone-internet/phone" element={<UserPhone/>}/>
+            <Route exact path="/phone-internet/internet" element={<UserInternet/>}/>
+            <Route exact path="/phone-internet/wifi" element={<UserWifi/>}/>
+            <Route exact path="/phone-internet" element={<PIHome/>}/>
           </Routes>
 
       </Router>

@@ -1,13 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Navbar() {
+function NavbarUser() {
 
   let navigate = useNavigate()
 
   const logout = async() => {
     sessionStorage.clear()
-    window.location.reload(false);
+    window.location.href = "/";
   }
 
   return (
@@ -36,7 +36,7 @@ function Navbar() {
                     <a className="nav-link" href="#">Insurance</a>
                 </li>
                 <li className="nav-item me-2">
-                    <a className="nav-link" href="#">Phone & Internet</a>
+                    <a className="nav-link" href="/phone-internet">Phone & Internet</a>
                 </li>
                 <li className="nav-item me-2">
                     <a className="nav-link" href="#">University</a>
@@ -119,4 +119,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavbarUser

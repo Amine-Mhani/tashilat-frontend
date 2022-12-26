@@ -3,7 +3,7 @@ import React from 'react'
 function Navbar() {
   const logout = async() => {
     sessionStorage.clear()
-    window.location.reload(false);
+    window.location.href = "/";
   }
   return (
     
