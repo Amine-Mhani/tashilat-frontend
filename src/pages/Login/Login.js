@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { redirect, useNavigate } from 'react-router-dom'
 
 
 function Login() {
@@ -16,13 +16,10 @@ function Login() {
     e.preventDefault()
     const response = await axios.get('http://localhost:2022/users/login?email='+email)
     const user = response.data
+    sessionStorage.setItem("user", JSON.stringify(user))
     console.log(user)
     if(password == user.password){
-      if(user.type == 'admin'){
-        navigate('/')
-      }else if(user.type == 'user'){
-        navigate('/home')
-      }
+      window.location.href = "/";
     }
   }
 

@@ -1,6 +1,10 @@
 import React from 'react'
 
 function Navbar() {
+  const logout = async() => {
+    sessionStorage.clear()
+    window.location.reload(false);
+  }
   return (
     
 
@@ -54,8 +58,8 @@ function Navbar() {
                             </div>
                           </div>
                           <div className="flex-grow-1">
-                            <span className="fw-semibold d-block">John Doe</span>
-                            <small className="text-muted">Admin</small>
+                            <span className="fw-semibold d-block">{JSON.parse(sessionStorage.getItem("user")).nom+" "+JSON.parse(sessionStorage.getItem("user")).prenom}</span>
+                            <small className="text-muted">{JSON.parse(sessionStorage.getItem("user")).type}</small>
                           </div>
                         </div>
                       </a>
@@ -88,10 +92,10 @@ function Navbar() {
                       <div className="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="auth-login-basic.html">
+                      <button className="dropdown-item" onClick={(e)=>logout()}>
                         <i className="bx bx-power-off me-2"></i>
                         <span className="align-middle">Log Out</span>
-                      </a>
+                      </button>
                     </li>
                   </ul>
                 </li>

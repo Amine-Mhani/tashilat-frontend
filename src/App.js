@@ -15,37 +15,65 @@ import AddWifi from './pages/Admin/Wifi/Bill/AddWifi';
 import Login from './pages/Login/Login';
 import Home from './pages/User/Home';
 import Dashboard from './pages/Admin/Dashboard';
+import Main from './pages/Login/Main';
 
 
 
 function App() {
-  return (
+  if(sessionStorage.getItem("user") != null){
+    if(JSON.parse(sessionStorage.getItem("user")).type == "admin"){
+    return (
+      <Router>
+          <Routes>
+            <Route exact path="/" element={<Dashboard/>}/>
+
+            <Route exact path="/login" element={<Login/>}/>
+
+            <Route exact path="/operator" element={<Operator/>}/>
+            <Route exact path="/operator/add" element={<AddOperator/>}/>
+
+            <Route exact path="/phone" element={<Phone/>}/>
+            <Route exact path="/phone/add" element={<AddPhone/>}/>
+
+            <Route exact path="/internet" element={<Internet/>}/>
+            <Route exact path="/internet/add" element={<AddInternet/>}/>
+
+            <Route exact path="/wifi/clients" element={<Client/>}/>
+            <Route exact path="/wifi/clients-add" element={<AddClient/>}/>
+
+            <Route exact path="/wifi/bills" element={<Wifi/>}/>
+            <Route exact path="/wifi/bills-add" element={<AddWifi/>}/>
+
+            <Route exact path="/home" element={<Home/>}/>
+          </Routes>
+
+      </Router>
+    );
+    }else if(JSON.parse(sessionStorage.getItem("user")).type == "user"){
+      return (
+      <Router>
+          <Routes>
+            
+            <Route exact path="/" element={<Home/>}/>
+          </Routes>
+
+      </Router>
+      );
+    }
+  }else{
+    return (
     <Router>
-        <Routes>
-          <Route exact path="/" element={<Dashboard/>}/>
+          <Routes>
+            <Route exact path="/login" element={<Login/>}/>
+            <Route exact path="/" element={<Main/>}/>
+          </Routes>
 
-          <Route exact path="/login" element={<Login/>}/>
+      </Router>
+      );
+  }
 
-          <Route exact path="/operator" element={<Operator/>}/>
-          <Route exact path="/operator/add" element={<AddOperator/>}/>
 
-          <Route exact path="/phone" element={<Phone/>}/>
-          <Route exact path="/phone/add" element={<AddPhone/>}/>
 
-          <Route exact path="/internet" element={<Internet/>}/>
-          <Route exact path="/internet/add" element={<AddInternet/>}/>
-
-          <Route exact path="/wifi/clients" element={<Client/>}/>
-          <Route exact path="/wifi/clients-add" element={<AddClient/>}/>
-
-          <Route exact path="/wifi/bills" element={<Wifi/>}/>
-          <Route exact path="/wifi/bills-add" element={<AddWifi/>}/>
-
-          <Route exact path="/home" element={<Home/>}/>
-        </Routes>
-
-    </Router>
-  );
 }
 
 export default App;

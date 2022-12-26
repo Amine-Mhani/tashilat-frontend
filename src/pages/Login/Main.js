@@ -1,25 +1,18 @@
 import React from 'react'
-import axios from 'axios'
-import NavbarUser from '../../components/NavbarUser'
-import { useNavigate } from 'react-router-dom'
+import NavbarUserNo from '../../components/NavbarUserNo'
 
-function Home() {
-
-  
-
+function Main() {
   return (
     <>
       <div className="layout-page">
-        <NavbarUser/>
+        <NavbarUserNo/>
         <div className="content-wrapper">
           <div className="container-xxl flex-grow-1 container-p-y">
-            {JSON.parse(localStorage.getItem('mod'))}
           </div>
         </div>
       </div>
       </>
-    
   )
 }
 
-export default Home
+export default Main
