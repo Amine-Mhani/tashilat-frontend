@@ -17,7 +17,7 @@ function NavbarUser() {
             className="layout-navbar navbar navbar-expand-xl navbar-atached align-items-center bg-navbar-theme bg-dark p-4"
             id="layout-navbar"
           >
-            <a className="navbar-brand" href="#"><b className="display-6">T A S H I L A T</b></a>
+            <a className="navbar-brand" href="/"><b className="display-6">T A S H I L A T</b></a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -27,7 +27,7 @@ function NavbarUser() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item active me-2">
-                    <a className="nav-link" href="#">Home</a>
+                    <a className="nav-link" href="/">Home</a>
                 </li>
                 <li className="nav-item me-2">
                     <a className="nav-link" href="#">Water & Electricity</a>
