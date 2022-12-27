@@ -1,9 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import emailjs from '@emailjs/browser'
 import NavbarUser from '../../../components/NavbarUser'
 import PDFXL from '../../../components/PDFXL'
-import PDF from '../../../components/PDF'
+import PdfWifi from '../../../components/PdfWifi'
 
 function UserWifi() {
 
@@ -23,7 +22,7 @@ function UserWifi() {
   let [ability, setAbility] = React.useState();
 
   const loadWifis = async()=>{
-    const all = await axios.get('http://localhost:2022/wifi/all')
+    const all = await axios.get('http://localhost:2022/wifi/not')
     setWifis(all.data)
     console.log(all.data)
 }
@@ -97,7 +96,7 @@ const handleCreation = async(e) =>{
 
 const search = async(e)=>{
   const sid = e.target.value
-  const some = await axios.get('http://localhost:2022/wifi/code/'+sid)
+  const some = await axios.get('http://localhost:2022/wifi/not-code/'+sid)
   setWifis(some.data)
   console.log(some.data)
 }
@@ -140,14 +139,14 @@ const state = (state) => {
         <NavbarUser/>
         <div className="content-wrapper pb-5">
           <div className="container-xxl flex-grow-1 container-p-y mb-5">
-          <div className={`bs-toast toast toast-placement-ex m-2 bg-success top-0 end-0 fade ${openAdd?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+          <div className={`bs-toast toast toast-placement-ex m-2 bg-info top-0 end-0 fade ${openUpdate?"show":"hide"}`} role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
         <div className="toast-header">
           <i className="bx bx-bell me-2"></i>
-          <div className="me-auto fw-semibold">Item created</div>
+          <div className="me-auto fw-semibold">Item payed</div>
           <small>now</small>
-          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenAdd(openAdd?false:true)} aria-label="Close"></button>
+          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenAdd(openUpdate?false:true)} aria-label="Close"></button>
         </div>
-        <div className="toast-body">This item was added successfully in the database.</div>
+        <div className="toast-body">This item was payed successfully.</div>
       </div>
           <div className="m-5 text-center"><h2>Wifi</h2></div>
           <div className="card mb-4">
@@ -210,7 +209,7 @@ const state = (state) => {
                               data-bs-target="#editModal" 
                                 ><i className="bx bx-edit-alt me-1" ></i> Payer</button>
 
-                               <PDF wifi={wifi}/>
+                               <PdfWifi wifi={wifi} type={"dropdown-item"}/>
                             </div>
                           </div>
                         </td>

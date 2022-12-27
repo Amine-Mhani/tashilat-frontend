@@ -9,6 +9,18 @@ import '../assets/css/pdfCss.css';
 //     content: () => componentRef.current,
 //   });
 const PDFXL = (props) => {
+
+    const date = () => {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        return today;
+    }
+
+
     const ref =React.createRef();
     const [showResults, setShowResults] = React.useState(false)
 const componentRef = useRef();
@@ -30,7 +42,7 @@ const handlePrint = useReactToPrint({
             {/* debut dernierement ajouté */}
 <div class="container">
     <div class="row justify-content-center" >
-    <img class="img-responsive" alt="iamgurdeeposahan" src="https://seeklogo.com/images/T/tasshilat-logo-EF4B36438D-seeklogo.com.png" style={{width: "200px",borderRadius:"75px"}} />
+    <img class="img-responsive" alt="iamgurdeeposahan" src="../assets/img/elements/tashilat.jpg" style={{width: "300px",borderRadius:"75px"}} />
     </div>
 
             <div class="receipt-main"></div>
@@ -130,7 +142,7 @@ const handlePrint = useReactToPrint({
 				<div class="receipt-header receipt-header-mid receipt-footer">
 					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
 						<div class="receipt-center d-flex justify-content-center">
-							<p><b>Date :</b> 15 Aug 2016</p>
+							<p><b>Date :</b>{date()}</p>
 							<h5 style={{color: "rgb(140, 140, 140)"}}>Thank you for your business!</h5>
 						</div>
 					</div>

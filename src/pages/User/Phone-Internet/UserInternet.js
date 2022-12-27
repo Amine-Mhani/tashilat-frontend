@@ -3,11 +3,16 @@ import axios from 'axios'
 import emailjs from '@emailjs/browser'
 import NavbarUser from '../../../components/NavbarUser'
 import PDFXL from '../../../components/PDFXL'
+import PdfInternet from '../../../components/PdfInternet'
 
 function UserInternet() {
 
   const[internets, setInternets] = React.useState([])
   const [operators, setOperators] = React.useState([])
+
+  const [internet, setInternet] = React.useState({
+    operator: {name: ""}
+  })
 
   const [email, setEmail] = React.useState('')
   const [number, setNumber] = React.useState('')
@@ -37,7 +42,7 @@ const handleCreation = async(e) =>{
   const operator = JSON.parse(operat)
   const internet = {email, number, operator, forfait, price}
   console.log(internet)
-  await axios.post('http://localhost:2022/Phone-Internet/internet/add',internet)
+  setInternet((await axios.post('http://localhost:2022/Phone-Internet/internet/add',internet)).data)
 
   
   emailjs.send("service_u16sz3s","template_oa5ayy",{
@@ -174,7 +179,7 @@ const reset = async()=>{
                           </div>
                         </div>
                       </form>
-                      <div style={{display: `${pdf?"block":"none"}`}}><PDFXL/></div>
+                      <div style={{display: `${pdf?"block":"none"}`}}><PdfInternet internet={internet} type={"btn btn-danger"}/></div>
                     </div>
                   </div>
                   <div className="card">
@@ -228,6 +233,7 @@ const reset = async()=>{
                               <button className="dropdown-item" data-bs-toggle="modal"
                               data-bs-target="#deleteModal" value={internet.internet_id}
                                 ><i className="bx bx-trash me-1"></i> Delete</button>
+                                <PdfInternet internet={internet} type={"dropdown-item"}/>
                             </div>
                           </div>
                         </td>

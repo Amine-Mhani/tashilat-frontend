@@ -2,12 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import emailjs from '@emailjs/browser'
 import NavbarUser from '../../../components/NavbarUser'
-import PDFXL from '../../../components/PDFXL'
+import PdfPhone from '../../../components/PdfPhone'
+
 
 function UserPhone() {
 
   const [phones, setPhones] = React.useState([])
   const [operators, setOperators] = React.useState([])
+  
+  const [phoneObj, setPhone] = React.useState({
+    operator:{name: ""},
+  })
 
   const [email, setEmail] = React.useState('')
   const [number, setNumber] = React.useState('')
@@ -36,7 +41,8 @@ const handleCreation = async(e) =>{
   const operator = JSON.parse(operat)
   const phone = {email, number, operator, price}
   console.log(phone)
-  await axios.post('http://localhost:2022/Phone-Internet/phone/add',phone)
+  setPhone((await axios.post('http://localhost:2022/Phone-Internet/phone/add',phone)).data)
+
 
   emailjs.send("service_u16sz3s","template_oa5ayy",{
     type_subject: "Phone",
@@ -164,7 +170,7 @@ const reset = async()=>{
                           </div>
                         </div>
                       </form>
-                      <div style={{display: `${pdf?"block":"none"}`}}><PDFXL/></div>
+                      <div style={{display: `${pdf?"block":"none"}`}}><PdfPhone phone={phoneObj} type={"btn btn-danger"}/></div>
                     </div>
                   </div>
           <div className="card">
@@ -214,12 +220,7 @@ const reset = async()=>{
                               <i className="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div className="dropdown-menu">
-                              <button className="dropdown-item" data-bs-toggle="modal"
-                              data-bs-target="#editModal" value={phone.phoneId}
-                                ><i className="bx bx-edit-alt me-1" ></i> Edit</button>
-                              <button className="dropdown-item" data-bs-toggle="modal"
-                              data-bs-target="#deleteModal" value={phone.phoneId}
-                                ><i className="bx bx-trash me-1"></i> Delete</button>
+                                <PdfPhone phone={phone} type={"dropdown-item"}/>
                             </div>
                           </div>
                         </td>
@@ -228,9 +229,6 @@ const reset = async()=>{
                     </tbody>
                   </table>
                         
-
-
-
                         
                 </div>
               </div>

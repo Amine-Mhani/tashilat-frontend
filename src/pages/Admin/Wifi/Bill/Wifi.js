@@ -5,6 +5,7 @@ import PDF from '../../../../components/PDF';
 import { useReactToPrint } from 'react-to-print'
 import Sidebar from '../../../../components/Sidebar'
 import Navbar from '../../../../components/Navbar'
+import PdfWifi from '../../../../components/PdfWifi';
 
 
 function Wifi() {
@@ -200,7 +201,7 @@ function Wifi() {
                               data-bs-target="#deleteModal" 
                                 ><i className="bx bx-trash me-1"></i> Delete</button>
 
-                               <PDF wifi={wifi}/>
+                               <PdfWifi wifi={wifi} type={"btn btn-danger"}/>
                             </div>
                           </div>
                         </td>
