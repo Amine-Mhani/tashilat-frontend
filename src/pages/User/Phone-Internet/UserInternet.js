@@ -42,11 +42,12 @@ const handleCreation = async(e) =>{
   
   emailjs.send("service_u16sz3s","template_oa5ayy",{
     type_subject: "Internet",
-    type_text: "internet",
+    type_text: "Internet",
+    number: number,
     price: price,
+    operator: operator.name,
     email: email,
     },"x-a75am7vos_rmljv");
-
   
 
   setOpenAdd(openAdd?false:true)

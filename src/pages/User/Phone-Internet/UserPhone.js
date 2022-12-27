@@ -41,7 +41,9 @@ const handleCreation = async(e) =>{
   emailjs.send("service_u16sz3s","template_oa5ayy",{
     type_subject: "Phone",
     type_text: "phone",
+    number: number,
     price: price,
+    operator: operator.name,
     email: email,
     },"x-a75am7vos_rmljv");
 
