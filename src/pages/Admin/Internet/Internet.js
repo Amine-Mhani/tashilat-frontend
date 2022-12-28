@@ -31,14 +31,6 @@ function Internet() {
       
     }
 
-    const loadOperatorById = async(e)=>{
-      const id = e.target.value
-      const all = await axios.get('http://localhost:2022/operator/all')
-      setOperators(all.data)
-      console.log(all.data)
-      
-    }
-
     const deleteInternet = async(e) => {
       console.log(e.target.value)
       const id = e.target.value

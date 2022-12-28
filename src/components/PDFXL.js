@@ -1,13 +1,9 @@
 import React, { Component ,useRef} from 'react';
-import Pdf  from 'react-to-pdf';
+
 import { useReactToPrint } from "react-to-print";
 import '../assets/css/hidden.css';
 import '../assets/css/pdfCss.css';
-// const ref =React.createRef();
-// const componentRef = useRef();
-// const handlePrint = useReactToPrint({
-//     content: () => componentRef.current,
-//   });
+
 const PDFXL = (props) => {
 
     const date = () => {

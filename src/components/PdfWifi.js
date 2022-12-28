@@ -1,14 +1,9 @@
 import React, { Component ,useRef} from 'react';
-import Pdf  from 'react-to-pdf';
 
 import { useReactToPrint } from "react-to-print";
 import '../assets/css/hidden.css';
 import '../assets/css/pdfCss.css';
-// const ref =React.createRef();
-// const componentRef = useRef();
-// const handlePrint = useReactToPrint({
-//     content: () => componentRef.current,
-//   });
+
 const PdfWifi = (props) => {
 
     const date = () => {
@@ -41,7 +36,7 @@ const handlePrint = useReactToPrint({
         <>
         <div style={{margin:"0px"}} >
         <i class="fas fa-file-pdf"></i>
-        <button onClick={handlePrint} className={""+props.type}><i className="bx bxs-file-pdf me-1"></i> PDF</button>
+        <button onClick={handlePrint} className={""+props.type} id={""+props.iden}><i className="bx bxs-file-pdf me-1"></i> PDF</button>
         <div className='rowRegistration' ref={componentRef}>
             {/* <h1>{props.first_name}</h1>
             <h1>{props.last_name}</h1> */}

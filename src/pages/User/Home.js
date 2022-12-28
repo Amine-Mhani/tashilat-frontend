@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 import NavbarUser from '../../components/NavbarUser'
-import { useNavigate } from 'react-router-dom'
+
 
 function Home() {
 

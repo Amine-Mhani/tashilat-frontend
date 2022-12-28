@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
 
 function Sidebar() {
@@ -82,41 +81,6 @@ function Sidebar() {
                 <i className="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
-            </li>
-
-            <li className="menu-item">
-              <a href="#" className="menu-link menu-toggle">
-                <i className="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Layouts">Layouts</div>
-              </a>
-
-              <ul className="menu-sub">
-                <li className="menu-item">
-                  <a href="layouts-without-menu.html" className="menu-link">
-                    <div data-i18n="Without menu">Without menu</div>
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="layouts-without-navbar.html" className="menu-link">
-                    <div data-i18n="Without navbar">Without navbar</div>
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="layouts-container.html" className="menu-link">
-                    <div data-i18n="Container">Container</div>
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="layouts-fluid.html" className="menu-link">
-                    <div data-i18n="Fluid">Fluid</div>
-                  </a>
-                </li>
-                <li className="menu-item">
-                  <a href="layouts-blank.html" className="menu-link">
-                    <div data-i18n="Blank">Blank</div>
-                  </a>
-                </li>
-              </ul>
             </li>
 
             <li className="menu-header small text-uppercase">

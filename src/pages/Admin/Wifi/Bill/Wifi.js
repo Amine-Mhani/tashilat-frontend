@@ -1,8 +1,6 @@
 import React from 'react'
 import axios from 'axios';
 
-import PDF from '../../../../components/PDF';
-import { useReactToPrint } from 'react-to-print'
 import Sidebar from '../../../../components/Sidebar'
 import Navbar from '../../../../components/Navbar'
 import PdfWifi from '../../../../components/PdfWifi';
@@ -13,10 +11,6 @@ function Wifi() {
     const[wifis, setWifis] = React.useState([])
     const [operators, setOperators] = React.useState([])
 
-    const [number, setNumber] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [amount, setAmount] = React.useState("");
-    const [operator, setOperator] = React.useState("");
     const [id, setId] = React.useState("");
 
     let [openUpdate, setOpenUpdate] = React.useState();
@@ -86,6 +80,7 @@ function Wifi() {
       await axios.post('http://localhost:2022/wifi/update', wifi)
       setOpenUpdate(openUpdate?false:true)
       loadWifis()
+      
 
     }
 
@@ -201,7 +196,7 @@ function Wifi() {
                               data-bs-target="#deleteModal" 
                                 ><i className="bx bx-trash me-1"></i> Delete</button>
 
-                               <PdfWifi wifi={wifi} type={"btn btn-danger"}/>
+                               <PdfWifi wifi={wifi} type={"dropdown-item"}/>
                             </div>
                           </div>
                         </td>

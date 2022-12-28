@@ -3,21 +3,17 @@ import axios from 'axios'
 import NavbarUser from '../../../components/NavbarUser'
 import PDFXL from '../../../components/PDFXL'
 import PdfWifi from '../../../components/PdfWifi'
+import emailjs from '@emailjs/browser'
 
 function UserWifi() {
 
   const[wifis, setWifis] = React.useState([])
-  const [operators, setOperators] = React.useState([])
+  const[wifi, setWifi] = React.useState("")
 
-  const [email, setEmail] = React.useState('')
-  const [number, setNumber] = React.useState('')
-  const [operat, setOperator] = React.useState('')
-  const [price, setPrice] = React.useState('')
 
   const [id, setId] = React.useState("");
 
   let [openUpdate, setOpenUpdate] = React.useState();
-  let [openAdd, setOpenAdd] = React.useState();
   let [pdf, setPDF] = React.useState();
   let [ability, setAbility] = React.useState();
 
@@ -27,12 +23,7 @@ function UserWifi() {
     console.log(all.data)
 }
 
-const loadOperators = async()=>{
-  const all = await axios.get('http://localhost:2022/operator/all')
-  setOperators(all.data)
-  console.log(all.data)
-  
-}
+
 
 const editWifi = async(e) => {
   console.log(e.target.value)
@@ -54,45 +45,25 @@ const editWifi = async(e) => {
 }
 
 const updateWifi = async(e) => {
-  const wifi = {id}
-  console.log(wifi)
-  await axios.post('http://localhost:2022/wifi/update', wifi)
+  const wifiz = {id, user: JSON.parse(sessionStorage.getItem("user"))}
+  console.log(wifiz)
+  const wifi = await axios.post('http://localhost:2022/wifi/update', wifiz)
   setOpenUpdate(openUpdate?false:true)
+  console.log(wifi.data)
+  emailjs.send("service_u16sz3s","template_oa5ayy",{
+    type_subject: "Wifi",
+    type_text: "Wifi",
+    number: wifi.data.client.number,
+    price: wifi.data.price,
+    operator: wifi.data.operator.name,
+    email: wifi.data.email,
+    },"x-a75am7vos_rmljv");
+  document.getElementById("pdf-"+id).click()
   loadWifis()
 
 }
 
-const handleCreation = async(e) =>{
-  /**e.preventDefault()
-  const operator = JSON.parse(operat)
-  const phone = {email, number, operator, price}
-  console.log(phone)
-  await axios.post('http://localhost:2022/Phone-Internet/phone/add',phone)
 
-  emailjs.send("service_u16sz3s","template_oa5ayy",{
-    type_subject: "Phone",
-    type_text: "phone",
-    price: price,
-    email: email,
-    },"x-a75am7vos_rmljv");
-
-
-  /**setNumber("")
-  setEmail("")
-  setOperator("")
-  setPrice("")
-
-  setOpenAdd(openAdd?false:true)
-  setPDF(pdf?false:true)
-  setAbility(ability?false:true)
-
-  loadPhones();*/
-
-  
-  
-  //alert('phone was create successfully')
-
-}
 
 const search = async(e)=>{
   const sid = e.target.value
@@ -102,10 +73,7 @@ const search = async(e)=>{
 }
 
 const reset = async()=>{
-  setNumber("")
-  setEmail("")
-  setOperator("")
-  setPrice("")
+
   setPDF(pdf?false:true)
   setAbility(ability?false:true)
 }
@@ -129,7 +97,6 @@ const state = (state) => {
 
   React.useEffect(() => {
     loadWifis();
-    loadOperators();
 
   }, [])
 
@@ -144,7 +111,7 @@ const state = (state) => {
           <i className="bx bx-bell me-2"></i>
           <div className="me-auto fw-semibold">Item payed</div>
           <small>now</small>
-          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenAdd(openUpdate?false:true)} aria-label="Close"></button>
+          <button type="button" className="btn-close" data-bs-dismiss="toast" onClick={(e)=>setOpenUpdate(openUpdate?false:true)} aria-label="Close"></button>
         </div>
         <div className="toast-body">This item was payed successfully.</div>
       </div>
@@ -209,7 +176,7 @@ const state = (state) => {
                               data-bs-target="#editModal" 
                                 ><i className="bx bx-edit-alt me-1" ></i> Payer</button>
 
-                               <PdfWifi wifi={wifi} type={"dropdown-item"}/>
+                               <PdfWifi wifi={wifi} type={"dropdown-item"} iden={"pdf-"+wifi.id}/>
                             </div>
                           </div>
                         </td>

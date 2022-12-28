@@ -243,7 +243,7 @@ function Dashboard() {
                   <div className="card h-100">
                     <div className="card-header d-flex align-items-center justify-content-between pb-0">
                       <div className="card-title mb-0">
-                        <h5 className="m-0 me-2">Order Statistics</h5>
+                        <h5 className="m-0 me-2">Services</h5>
                         <small className="text-muted">42.82k Total Sales</small>
                       </div>
                       <div className="dropdown">
@@ -281,8 +281,8 @@ function Dashboard() {
                           </div>
                           <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div className="me-2">
-                              <h6 className="mb-0">Electronic</h6>
-                              <small className="text-muted">Mobile, Earbuds, TV</small>
+                              <h6 className="mb-0">Phone & Internet</h6>
+                              <small className="text-muted">Phone minutes, Internet, Wifi</small>
                             </div>
                             <div className="user-progress">
                               <small className="fw-semibold">82.5k</small>
@@ -291,12 +291,12 @@ function Dashboard() {
                         </li>
                         <li className="d-flex mb-4 pb-1">
                           <div className="avatar flex-shrink-0 me-3">
-                            <span className="avatar-initial rounded bg-label-success"><i className="bx bx-closet"></i></span>
+                            <span className="avatar-initial rounded bg-label-success"><i className="bx bx-building"></i></span>
                           </div>
                           <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div className="me-2">
-                              <h6 className="mb-0">Fashion</h6>
-                              <small className="text-muted">T-shirt, Jeans, Shoes</small>
+                              <h6 className="mb-0">University</h6>
+                              <small className="text-muted">University fees</small>
                             </div>
                             <div className="user-progress">
                               <small className="fw-semibold">23.8k</small>
@@ -305,12 +305,12 @@ function Dashboard() {
                         </li>
                         <li className="d-flex mb-4 pb-1">
                           <div className="avatar flex-shrink-0 me-3">
-                            <span className="avatar-initial rounded bg-label-info"><i className="bx bx-home-alt"></i></span>
+                            <span className="avatar-initial rounded bg-label-info"><i className="bx bx-shield"></i></span>
                           </div>
                           <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div className="me-2">
-                              <h6 className="mb-0">Decor</h6>
-                              <small className="text-muted">Fine Art, Dining</small>
+                              <h6 className="mb-0">Insurance</h6>
+                              <small className="text-muted">Car, House</small>
                             </div>
                             <div className="user-progress">
                               <small className="fw-semibold">849k</small>
@@ -320,13 +320,12 @@ function Dashboard() {
                         <li className="d-flex">
                           <div className="avatar flex-shrink-0 me-3">
                             <span className="avatar-initial rounded bg-label-secondary"
-                              ><i className="bx bx-football"></i
-                            ></span>
+                              ><i className="bx bx-bulb"></i></span>
                           </div>
                           <div className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                             <div className="me-2">
-                              <h6 className="mb-0">Sports</h6>
-                              <small className="text-muted">Football, Cricket Kit</small>
+                              <h6 className="mb-0">Water & Electricity</h6>
+                              <small className="text-muted">Water bill, Electricity bill</small>
                             </div>
                             <div className="user-progress">
                               <small className="fw-semibold">99</small>

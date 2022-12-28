@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { redirect, useNavigate } from 'react-router-dom'
 
 
 function Login() {
@@ -9,7 +8,7 @@ function Login() {
   const [password, setPassword] = React.useState("")
 
 
-  let navigate = useNavigate()
+
 
 
   const login = async(e) => {

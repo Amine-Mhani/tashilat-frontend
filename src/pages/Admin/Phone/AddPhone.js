@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import Operator from '../Operator/Operator'
+
 import Sidebar from '../../../components/Sidebar'
 import Navbar from '../../../components/Navbar'
 

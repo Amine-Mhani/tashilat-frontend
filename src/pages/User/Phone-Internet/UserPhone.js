@@ -39,7 +39,7 @@ const loadOperators = async()=>{
 const handleCreation = async(e) =>{
   e.preventDefault()
   const operator = JSON.parse(operat)
-  const phone = {email, number, operator, price}
+  const phone = {email, number, operator, price, user: JSON.parse(sessionStorage.getItem("user"))}
   console.log(phone)
   setPhone((await axios.post('http://localhost:2022/Phone-Internet/phone/add',phone)).data)
 

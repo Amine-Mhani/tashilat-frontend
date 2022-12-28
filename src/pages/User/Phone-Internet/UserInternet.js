@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import emailjs from '@emailjs/browser'
 import NavbarUser from '../../../components/NavbarUser'
-import PDFXL from '../../../components/PDFXL'
 import PdfInternet from '../../../components/PdfInternet'
 
 function UserInternet() {
@@ -40,7 +39,7 @@ const loadOperators = async()=>{
 const handleCreation = async(e) =>{
   e.preventDefault()
   const operator = JSON.parse(operat)
-  const internet = {email, number, operator, forfait, price}
+  const internet = {email, number, operator, forfait, price, user: JSON.parse(sessionStorage.getItem("user"))}
   console.log(internet)
   setInternet((await axios.post('http://localhost:2022/Phone-Internet/internet/add',internet)).data)
 

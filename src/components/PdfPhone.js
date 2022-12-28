@@ -1,5 +1,4 @@
 import React, { Component ,useRef} from 'react';
-import Pdf  from 'react-to-pdf';
 
 import { useReactToPrint } from "react-to-print";
 import '../assets/css/hidden.css';
